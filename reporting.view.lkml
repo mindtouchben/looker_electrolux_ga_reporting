@@ -47,8 +47,23 @@ view: reporting {
     sql: ${TABLE}.site_id ;;
   }
 
+  measure: total_dealer_actions {
+    type: sum
+    sql: ${dealer_actions} ;;
+  }
+
+  measure: total_engineer_actions {
+    type: sum
+    sql: ${engineer_actions} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
+  }
+
+  dimension: region {
+    type: string
+    sql: SUBSTRING(${TABLE}.page_path, 2, 5) ;;
   }
 }
