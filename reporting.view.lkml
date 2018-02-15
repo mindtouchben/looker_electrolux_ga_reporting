@@ -34,7 +34,7 @@ view: reporting {
 
   dimension: page_path {
     type: string
-    sql: ${TABLE}.page_path ;;
+    sql: LOWER(${TABLE}.page_path) ;;
   }
 
   dimension: pageviews {
@@ -55,6 +55,14 @@ view: reporting {
   measure: total_engineer_actions {
     type: sum
     sql: ${engineer_actions} ;;
+  }
+
+  measure: tickets_submitted {
+    type: count
+    filters: {
+      field: page_path
+      value: "%thank_you%"
+    }
   }
 
   measure: count {
